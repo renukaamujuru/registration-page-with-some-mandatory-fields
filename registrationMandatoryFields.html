@@ -1,0 +1,116 @@
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		#regis{
+			border-style: groove;
+			width: 33%;
+			margin-top: 122px;
+			margin-left:491px; 		
+			padding-top: 30px;
+			padding-left: 100px;
+			padding-bottom: 40px;
+		}
+		.spanerr{
+			color:red;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div id="regis">
+			<h1>REGISTRATION FORM</h1>
+	<form id="form1" name="form1" onfocusout="checkForEmptyFields()">
+	
+		<div class="inputt">
+		<input type="text" id="firstName" class="inputField" placeholder="Enter first name">
+		<br><br>
+		</div>
+
+		<div class="inputt">
+		<input type="text" id="lastName" class="inputField" placeholder="Enter last name"><br><br>
+		</div>
+
+		<div class="inputt">
+		<textarea rows="4" cols="50" id="address" placeholder="address" class="inputField" ></textarea><br><br>
+		</div>
+
+		<div class="inputt">
+		<input type="text" id="emailId" class="inputField" placeholder=" Enter email id">
+		<br><br>
+	    </div>
+
+	    <div class="inputt">
+	    <input type="password" length="10" id="password" class="inputField"  placeholder="enter password"><br><br>
+		</div>
+
+		<div class="inputt">
+	    <input type="password" length="10" id="retypePassword" class="inputField"  placeholder="retype password"><br><br>
+		</div>
+
+	    <div class="inputt">
+	    <input type="text" length="10" id="phoneNumber" class="inputField" placeholder="Mobile Number"><br><br>
+		</div>	
+
+		
+	<div class="button">
+		<input type="button" value="submit" id="submitBtn" onclick="checkForEmptyFields()">	
+	</div>
+
+	</form>
+</div>
+		<script type="text/javascript">
+			// Mandatory: First name, email,password,retype password
+			var form1 = document.getElementById('form1');
+			var inputsField = document.getElementsByClassName('inputField');
+			var divInputField = document.getElementsByClassName('inputt');
+			var spanEl=document.getElementsByTagName('span');
+			var submitBtn=document.getElementById('submitBtn');
+			
+  			function checkForEmptyFields()
+			{
+				var count=0;
+			    for(var i=spanEl.length-1;i>=0;i--)
+			    {
+			    	spanEl[i].parentNode.removeChild(spanEl[i]);
+			    }
+				for(var i=0;i<inputsField.length;i++)
+				{
+					var inputFields=inputsField[i];
+			 		console.log(inputFields);
+			 		if(inputFields === inputsField[0] || inputFields === inputsField[3] || inputFields === inputsField[4] || inputFields === inputsField[5])
+			 		{
+			 			
+			 			if(inputFields.value == "")
+			 			{
+			 				
+			 				var spanElement=document.createElement('span');
+			 				spanElement.innerHTML="this field is required";
+			 				spanElement.style.color="red";
+			 				inputFields.appendChild(spanElement);
+			 				console.log(form1.childNodes);
+			 				form1.insertBefore(spanElement,form1.childNodes[2* i + count+2]);
+			 				
+			 			}
+			 			count++;
+			 			
+			 		} 
+
+			 	}
+		    }
+		    submitBtn.onclick=function()
+		    {
+		    	checkForEmptyFields();
+		    	if(spanEl == 0)
+		    	{
+		    		for(var i=0;i<inputsField.length;i++)
+			 	       {
+			 		       var inputFields2=inputsField[i];
+			 		       inputFields2.value="";
+			 	       }
+			    }
+		    }
+
+		</script>
+</body>
+</html>
